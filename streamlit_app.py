@@ -174,7 +174,7 @@ def update_data(conn, df, changes):
 # Inventory tracker
 
 **Welcome to your store's inventory tracker!**
-This page reads and writes directly from/to our inventory database.
+This page reads and writes directly from/to your inventory database.
 """
 
 st.info(
