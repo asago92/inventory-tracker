@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 pages = {
-    ":material/account_circle:": [
+    "Account: [
         st.Page("create_account.py", title="Create your Account", icon=":material/account_circle:"),
     ],
     "Contact": [
