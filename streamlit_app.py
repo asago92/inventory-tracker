@@ -13,6 +13,10 @@ st.set_page_config(
     page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
 )
 st.header("Inventory Tracker")
+"""
+    **Welcome to your store's inventory tracker!**
+    This page reads and writes directly from/to your inventory database.
+"""
 
 tab1, tab2, tab3 = st.tabs(["Inventory Tracker", "Units Left", "Best Selling Items"])
 # -----------------------------------------------------------------------------
@@ -174,10 +178,6 @@ def update_data(conn, df, changes):
 
 with tab1:
     #st.subheader("Inventory Tracker", divider="red")
-    """
-    **Welcome to your store's inventory tracker!**
-    This page reads and writes directly from/to your inventory database.
-    """
     
     st.info(
         """
