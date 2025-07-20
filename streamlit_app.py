@@ -10,11 +10,11 @@ import pandas as pd
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title="Inventory tracker",
-    # page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
+    page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
 )
-st.header("Inventory tracker")
+st.header("Inventory Tracker")
 
-tab1, tab2, tab3 = st.tabs(["Tracker", "Units Left", "Best Selling Items"])
+tab1, tab2, tab3 = st.tabs(["Inventory Tracker", "Units Left", "Best Selling Items"])
 # -----------------------------------------------------------------------------
 # Declare some useful functions.
 
@@ -173,7 +173,7 @@ def update_data(conn, df, changes):
 # Set the title that appears at the top of the page.
 
 with tab1:
-    st.subheader("Inventory Tracker", divider="red")
+    #st.subheader("Inventory Tracker", divider="red")
     """
     **Welcome to your store's inventory tracker!**
     This page reads and writes directly from/to your inventory database.
@@ -230,7 +230,7 @@ with tab1:
 ""
 ""
 with tab2:
-    st.subheader("Units left", divider="red")
+    #st.subheader("Units left", divider="red")
     
     need_to_reorder = df[df["units_left"] < df["reorder_point"]].loc[:, "item_name"]
     
@@ -276,7 +276,7 @@ with tab2:
 
 # -----------------------------------------------------------------------------
 with tab3:
-    st.subheader("Best sellers", divider="red")
+    #st.subheader("Best sellers", divider="red")
     
     ""
     ""
