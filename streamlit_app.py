@@ -6,6 +6,16 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 
+# Set the title and favicon that appear in the Browser's tab bar.
+st.set_page_config(
+    page_title="Inventory tracker",
+    page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
+)
+st.header("Inventory Tracker",icon=":house:")
+"""
+    **Welcome to your store's inventory tracker!**
+    This page reads and writes directly from/to your inventory database.
+"""
 pages = {
     "Your account": [
         st.Page("create_account.py", title="Create your account"),
@@ -19,17 +29,6 @@ pages = {
 
 pg = st.navigation(pages, position="top")
 pg.run()
-
-# Set the title and favicon that appear in the Browser's tab bar.
-st.set_page_config(
-    page_title="Inventory tracker",
-    page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
-)
-st.header("Inventory Tracker",icon=":house:")
-"""
-    **Welcome to your store's inventory tracker!**
-    This page reads and writes directly from/to your inventory database.
-"""
 
 tab1, tab2, tab3 = st.tabs(["Inventory Tracker", "Units Left", "Best Selling Items"])
 # -----------------------------------------------------------------------------
