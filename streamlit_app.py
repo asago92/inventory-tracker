@@ -24,7 +24,7 @@ pages = {
 pg = st.navigation(pages, position="top")
 pg.run()
 
-st.header("Inventory Tracker", icon=":material/store:")
+st.header("Inventory Tracker :material/store:")
 """
     **Welcome to your store's inventory tracker!**
     This page reads and writes directly from/to your inventory database.
