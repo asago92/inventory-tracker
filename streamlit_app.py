@@ -12,6 +12,7 @@ st.set_page_config(
     page_title="Inventory tracker",
     # page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
 )
+st.header("Inventory tracker")
 
 tab1, tab2, tab3 = st.tabs(["Tracker", "Units Left", "Best Selling Items"])
 # -----------------------------------------------------------------------------
@@ -170,9 +171,6 @@ def update_data(conn, df, changes):
 # Draw the actual page, starting with the inventory table.
 
 # Set the title that appears at the top of the page.
-"""
-# Inventory tracker
-"""
 
 with tab1:
     st.subheader("Inventory Tracker", divider="red")
