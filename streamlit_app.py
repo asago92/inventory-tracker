@@ -11,7 +11,7 @@ st.set_page_config(
     page_title="Inventory tracker",
     page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
 )
-st.header("Inventory Tracker",icon=":house:")
+st.header("Inventory Tracker")
 """
     **Welcome to your store's inventory tracker!**
     This page reads and writes directly from/to your inventory database.
