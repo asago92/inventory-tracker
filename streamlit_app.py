@@ -6,6 +6,19 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 
+pages = {
+    "Your account": [
+        st.Page("create_account.py", title="Create your account"),
+        st.Page("manage_account.py", title="Manage your account"),
+    ],
+    "Resources": [
+        st.Page("learn.py", title="Learn about us"),
+        st.Page("trial.py", title="Try it out"),
+    ],
+}
+
+pg = st.navigation(pages, position="top")
+pg.run()
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
