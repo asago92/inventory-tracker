@@ -170,10 +170,13 @@ def update_data(conn, df, changes):
 # Draw the actual page, starting with the inventory table.
 
 # Set the title that appears at the top of the page.
-with tab1:
-    """
-    # Inventory tracker
+"""
+# Inventory tracker
+"""
 
+with tab1:
+    st.subheader("Inventory Tracker", divider="red")
+    """
     **Welcome to your store's inventory tracker!**
     This page reads and writes directly from/to your inventory database.
     """
@@ -275,7 +278,7 @@ with tab2:
 
 # -----------------------------------------------------------------------------
 with tab3:
-    st.subheader("Best sellers", divider="orange")
+    st.subheader("Best sellers", divider="red")
     
     ""
     ""
