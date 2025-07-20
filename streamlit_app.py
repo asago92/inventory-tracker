@@ -14,7 +14,7 @@ st.set_page_config(
 
 pages = {
     "Your account": [
-        st.Page("create_account.py", title="Create your account", icon=":account_circle:"),
+        st.Page("create_account.py", title="Create your account", page_icon=":account_circle:"),
     ],
     "Contact": [
         st.Page("contact.py", title="Contact us"),
