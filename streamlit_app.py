@@ -13,7 +13,7 @@ st.set_page_config(
     # page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
 )
 
-
+tab1, tab2, tab3 = st.tabs(["Tracker", "Units Left", "Best Selling Items"])
 # -----------------------------------------------------------------------------
 # Declare some useful functions.
 
@@ -170,54 +170,55 @@ def update_data(conn, df, changes):
 # Draw the actual page, starting with the inventory table.
 
 # Set the title that appears at the top of the page.
+with tab1:
 """
-# Inventory tracker
+    # Inventory tracker
 
-**Welcome to your store's inventory tracker!**
-This page reads and writes directly from/to your inventory database.
-"""
-
-st.info(
+    **Welcome to your store's inventory tracker!**
+    This page reads and writes directly from/to your inventory database.
     """
-    Use the table below to add, remove, and edit items.
-    And don't forget to commit your changes when you're done.
-    """
-)
+    
+    st.info(
+        """
+        Use the table below to add, remove, and edit items.
+        And don't forget to commit your changes when you're done.
+        """
+    )
 
-# Connect to database and create table if needed
-conn, db_was_just_created = connect_db()
-
-# Initialize data.
-if db_was_just_created:
-    initialize_data(conn)
-    st.toast("Database initialized with some sample data.")
-
-# Load data from database
-df = load_data(conn)
-
-# Display data with editable table
-edited_df = st.data_editor(
-    df,
-    disabled=["id"],  # Don't allow editing the 'id' column.
-    num_rows="dynamic",  # Allow appending/deleting rows.
-    column_config={
-        # Show dollar sign before price columns.
-        "price": st.column_config.NumberColumn(format="$%.2f"),
-        "cost_price": st.column_config.NumberColumn(format="$%.2f"),
-    },
-    key="inventory_table",
-)
-
-has_uncommitted_changes = any(len(v) for v in st.session_state.inventory_table.values())
-
-st.button(
-    "Commit changes",
-    type="primary",
-    disabled=not has_uncommitted_changes,
-    # Update data in database
-    on_click=update_data,
-    args=(conn, df, st.session_state.inventory_table),
-)
+    # Connect to database and create table if needed
+    conn, db_was_just_created = connect_db()
+    
+    # Initialize data.
+    if db_was_just_created:
+        initialize_data(conn)
+        st.toast("Database initialized with some sample data.")
+    
+    # Load data from database
+    df = load_data(conn)
+    
+    # Display data with editable table
+    edited_df = st.data_editor(
+        df,
+        disabled=["id"],  # Don't allow editing the 'id' column.
+        num_rows="dynamic",  # Allow appending/deleting rows.
+        column_config={
+            # Show dollar sign before price columns.
+            "price": st.column_config.NumberColumn(format="$%.2f"),
+            "cost_price": st.column_config.NumberColumn(format="$%.2f"),
+        },
+        key="inventory_table",
+    )
+    
+    has_uncommitted_changes = any(len(v) for v in st.session_state.inventory_table.values())
+    
+    st.button(
+        "Commit changes",
+        type="primary",
+        disabled=not has_uncommitted_changes,
+        # Update data in database
+        on_click=update_data,
+        args=(conn, df, st.session_state.inventory_table),
+    )
 
 
 # -----------------------------------------------------------------------------
@@ -227,64 +228,64 @@ st.button(
 ""
 ""
 ""
-
-st.subheader("Units left", divider="red")
-
-need_to_reorder = df[df["units_left"] < df["reorder_point"]].loc[:, "item_name"]
-
-if len(need_to_reorder) > 0:
-    items = "\n".join(f"* {name}" for name in need_to_reorder)
-
-    st.error(f"We're running dangerously low on the items below:\n {items}")
-
-""
-""
-
-st.altair_chart(
-    # Layer 1: Bar chart.
-    alt.Chart(df)
-    .mark_bar(
-        orient="horizontal",
+with tab2:
+    st.subheader("Units left", divider="red")
+    
+    need_to_reorder = df[df["units_left"] < df["reorder_point"]].loc[:, "item_name"]
+    
+    if len(need_to_reorder) > 0:
+        items = "\n".join(f"* {name}" for name in need_to_reorder)
+    
+        st.error(f"We're running dangerously low on the items below:\n {items}")
+    
+    ""
+    ""
+    
+    st.altair_chart(
+        # Layer 1: Bar chart.
+        alt.Chart(df)
+        .mark_bar(
+            orient="horizontal",
+        )
+        .encode(
+            x="units_left",
+            y="item_name",
+        )
+        # Layer 2: Chart showing the reorder point.
+        + alt.Chart(df)
+        .mark_point(
+            shape="diamond",
+            filled=True,
+            size=50,
+            color="salmon",
+            opacity=1,
+        )
+        .encode(
+            x="reorder_point",
+            y="item_name",
+        ),
+        use_container_width=True,
     )
-    .encode(
-        x="units_left",
-        y="item_name",
-    )
-    # Layer 2: Chart showing the reorder point.
-    + alt.Chart(df)
-    .mark_point(
-        shape="diamond",
-        filled=True,
-        size=50,
-        color="salmon",
-        opacity=1,
-    )
-    .encode(
-        x="reorder_point",
-        y="item_name",
-    ),
-    use_container_width=True,
-)
-
-st.caption("NOTE: The :diamonds: location shows the reorder point.")
+    
+    st.caption("NOTE: The :diamonds: location shows the reorder point.")
 
 ""
 ""
 ""
 
 # -----------------------------------------------------------------------------
-
-st.subheader("Best sellers", divider="orange")
-
-""
-""
-
-st.altair_chart(
-    alt.Chart(df)
-    .mark_bar(orient="horizontal")
-    .encode(
-        x="units_sold",
-        y=alt.Y("item_name").sort("-x"),
-    ),
-    use_container_width=True,
-)
+with tab3:
+    st.subheader("Best sellers", divider="orange")
+    
+    ""
+    ""
+    
+    st.altair_chart(
+        alt.Chart(df)
+        .mark_bar(orient="horizontal")
+        .encode(
+            x="units_sold",
+            y=alt.Y("item_name").sort("-x"),
+        ),
+        use_container_width=True,
+    )
