@@ -171,7 +171,7 @@ def update_data(conn, df, changes):
 
 # Set the title that appears at the top of the page.
 with tab1:
-"""
+    """
     # Inventory tracker
 
     **Welcome to your store's inventory tracker!**
