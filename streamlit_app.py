@@ -17,7 +17,7 @@ pages = {
         st.Page("create_account.py", title="Create your account", icon=":material/account_circle:"),
     ],
     "Contact": [
-        st.Page("contact.py", title="Contact us"),
+        st.Page("contact.py", title="Contact us",icon=":material/contact_support:"),
     ],
 }
 
