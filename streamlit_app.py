@@ -14,12 +14,10 @@ st.set_page_config(
 
 pages = {
     "Your account": [
-        #st.Page("create_account.py", title="Create your account"),
-        #st.Page("manage_account.py", title="Manage your account"),
+        st.Page("create_account.py", title="Create your account"),
     ],
-    "Resources": [
-        #st.Page("learn.py", title="Learn about us"),
-        #st.Page("trial.py", title="Try it out"),
+    "Contact": [
+        st.Page("contact.py", title="Contact us"),
     ],
 }
 
