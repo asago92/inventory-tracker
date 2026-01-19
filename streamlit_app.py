@@ -27,7 +27,7 @@ pg.run()
 st.header(":material/store: Inventory Tracker")
 """
     **Welcome to your store's inventory tracker!**
-    This page reads and writes directly from/to your inventory database.
+    
 """
 
 tab1, tab2, tab3 = st.tabs(["Inventory Tracker", "Units Left", "Best Selling Items"])
